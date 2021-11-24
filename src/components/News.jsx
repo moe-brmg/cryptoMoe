@@ -16,9 +16,8 @@ const News = ({ simplified }) => {
 
   useEffect(() => {
     dispatch(getCoinNews(count, category))
-    if (coins.length < 1) dispatch(fetchCoins(100))
+    if (coins.length < 99) dispatch(fetchCoins(100))
   }, [category, coins.length, dispatch])
-  console.log("news")
 
   if (loading) return <Loading />
 
@@ -38,8 +37,8 @@ const News = ({ simplified }) => {
           options={
             coins.length !== 0
               ? [
-                  ...coins?.data?.coins?.map((coin) => coin.name),
                   "cryptocurrency",
+                  ...coins?.data?.coins?.map((coin) => coin.name),
                 ]
               : ["cryptocurrency"]
           }

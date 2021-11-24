@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { fetchCoins } from "../app/cryptoActions"
 
 const Cryptocurrencies = ({ simplified }) => {
-  const count = simplified ? 10 : 100
+  const count = 100
   const [cryptos, setCryptos] = useState([])
   const [searchTerm, setSearchTerm] = useState("")
   const dispatch = useDispatch()
