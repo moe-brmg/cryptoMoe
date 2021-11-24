@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
+import HTMLReactParser from "html-react-parser"
 import { useParams } from "react-router-dom"
 import millify from "millify"
 import { Container } from "@mui/material"
+import { useGetCryptoDetailsQuery } from "../services/cryptoApi"
+import { useGetCryptoHistoryQuery } from "../services/cryptoHistoryApi"
 import Box from "@mui/material/Box"
 import InputLabel from "@mui/material/InputLabel"
 import MenuItem from "@mui/material/MenuItem"
@@ -9,28 +12,20 @@ import FormControl from "@mui/material/FormControl"
 import Select from "@mui/material/Select"
 import LineChart from "./LineChart"
 import Loading from "./Loading"
-import { fetchCoin, getCoinHistory } from "../app/cryptoActions"
-import { useDispatch } from "react-redux"
-import { useSelector } from "react-redux"
 
 const CryptoDetails = () => {
   const { coinId } = useParams()
   const [timePeriod, setTimePeriod] = useState("1y")
-  const dispatch = useDispatch()
-  const { loading, coin, coinHistory } = useSelector((state) => state.crypto)
-  const cryptoDetails = coin?.data?.coin
-
-  useEffect(() => {
-    dispatch(fetchCoin(coinId))
-    dispatch(getCoinHistory(coinId, timePeriod))
-  }, [coinId, dispatch, timePeriod])
+  const { data, isFetching } = useGetCryptoDetailsQuery(coinId)
+  const { data: coinHistory } = useGetCryptoHistoryQuery({ coinId, timePeriod })
+  const cryptoDetails = data?.data?.coin
 
   let time = []
   let stats = []
-  if (loading) return <Loading />
-  else {
-    time = ["3h", "24h", "7d", "30d", "1y", "3m", "3y", "5y"]
 
+  time = ["3h", "24h", "7d", "30d", "1y", "3m", "3y", "5y"]
+  //if (!isFetching) {
+  if (false) {
     stats = [
       {
         title: "Price to USD",
@@ -56,37 +51,39 @@ const CryptoDetails = () => {
       },
     ]
 
-    // const genericStats = [
-    //   {
-    //     title: "Number Of Markets",
-    //     value: `${cryptoDetails?.numberOfMarkets || 0}`,
-    //   },
-    //   {
-    //     title: "Number Of Exchanges",
-    //     value: `${cryptoDetails?.numberOfExchanges || 0}`,
-    //   },
-    //   // { title: 'Aprroved Supply', value: cryptoDetails?.approvedSupply ? <CheckOutlined /> : <StopOutlined />, icon: <ExclamationCircleOutlined /> },
-    //   {
-    //     title: "Total Supply",
-    //     value: `$ ${
-    //       cryptoDetails?.totalSupply && millify(cryptoDetails?.totalSupply)
-    //     }`,
-    //   },
-    //   {
-    //     title: "Circulating Supply",
-    //     value: `$ ${
-    //       cryptoDetails?.circulatingSupply &&
-    //       millify(cryptoDetails?.circulatingSupply)
-    //     }`,
-    //   },
-    // ]
+    const genericStats = [
+      {
+        title: "Number Of Markets",
+        value: `${cryptoDetails?.numberOfMarkets || 0}`,
+      },
+      {
+        title: "Number Of Exchanges",
+        value: `${cryptoDetails?.numberOfExchanges || 0}`,
+      },
+      // { title: 'Aprroved Supply', value: cryptoDetails?.approvedSupply ? <CheckOutlined /> : <StopOutlined />, icon: <ExclamationCircleOutlined /> },
+      {
+        title: "Total Supply",
+        value: `$ ${
+          cryptoDetails?.totalSupply && millify(cryptoDetails?.totalSupply)
+        }`,
+      },
+      {
+        title: "Circulating Supply",
+        value: `$ ${
+          cryptoDetails?.circulatingSupply &&
+          millify(cryptoDetails?.circulatingSupply)
+        }`,
+      },
+    ]
+  } else {
+    return <Loading />
   }
 
   return (
     <Container style={{ marginTop: 100 }}>
       <Box className="coin-heading-container">
         <h2 level={2} className="coin-name">
-          {cryptoDetails?.name} ({cryptoDetails?.slug}) Price
+          {data?.data?.coin.name} ({data?.data?.coin.slug}) Price
         </h2>
         <p>
           {cryptoDetails?.name} live price in US Dollar (USD). View value
@@ -111,6 +108,7 @@ const CryptoDetails = () => {
           </Select>
         </FormControl>
       </Box>
+
       <LineChart
         coinHistory={coinHistory}
         currentPrice={cryptoDetails?.price && millify(cryptoDetails?.price)}

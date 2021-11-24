@@ -2,37 +2,27 @@ import React, { useEffect, useState } from "react"
 import millify from "millify"
 import { Link } from "react-router-dom"
 import Avatar from "@mui/material/Avatar"
-import { Card, CardContent, Grid, Input } from "@mui/material"
+import { useGetCryptosQuery } from "../services/cryptoApi"
+import { Card, CardContent, Container, Grid, Input } from "@mui/material"
 import Loading from "./Loading"
-import { useDispatch, useSelector } from "react-redux"
-import { fetchCoins } from "../app/cryptoActions"
 
 const Cryptocurrencies = ({ simplified }) => {
   const count = simplified ? 10 : 100
+  const { data: cryptosList, isFetching } = useGetCryptosQuery(count)
   const [cryptos, setCryptos] = useState([])
   const [searchTerm, setSearchTerm] = useState("")
-  const dispatch = useDispatch()
-  const { loading, coins } = useSelector((state) => state.crypto)
 
   useEffect(() => {
-    if (coins.length < 1) dispatch(fetchCoins(count))
-  }, [coins.length, count, dispatch])
-
-  useEffect(() => {
-    const filteredData = coins?.data?.coins.filter((coin) =>
+    const filteredData = cryptosList?.data.coins.filter((coin) =>
       coin.name.toLowerCase().includes(searchTerm)
     )
-    simplified
-      ? setCryptos(filteredData?.slice(0, 10))
-      : setCryptos(filteredData)
-  }, [coins?.data?.coins, searchTerm, simplified])
+    setCryptos(filteredData)
+  }, [cryptosList, searchTerm])
 
-  if (loading) return <Loading />
-
+  if (isFetching) return <Loading />
   const style = !simplified ? { marginTop: 100 } : null
-
   return (
-    <div style={style}>
+    <Container style={style}>
       {!simplified && (
         <div className="search-crypto" style={{ marginBottom: 20 }}>
           <Input
@@ -68,7 +58,7 @@ const Cryptocurrencies = ({ simplified }) => {
           </Grid>
         ))}
       </Grid>
-    </div>
+    </Container>
   )
 }
 

@@ -10,7 +10,6 @@ import IconButton from "@mui/material/IconButton"
 import MenuIcon from "@mui/icons-material/Menu"
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft"
 import ChevronRightIcon from "@mui/icons-material/ChevronRight"
-import icon from "./assests/logo-white.png"
 import { Routes, Route, Link } from "react-router-dom"
 
 import "./App.css"
@@ -122,12 +121,9 @@ export default function App() {
             <MenuIcon />
           </IconButton>
           <div className="logo-container">
-            <Avatar
-              component={Link}
-              to={"/"}
-              src={icon}
-              sx={{ width: 100, height: 60 }}
-            />
+            <Link to="/">
+              <h3 style={{ color: "white" }}>Crypto Moe</h3>
+            </Link>
           </div>
         </Toolbar>
       </AppBar>

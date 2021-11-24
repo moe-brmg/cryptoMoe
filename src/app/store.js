@@ -1,12 +1,8 @@
-import { configureStore } from "@reduxjs/toolkit"
-import { cryptoApi } from "../services/cryptoApi"
-import { cryptoNewsApi } from "../services/cryptoNewsApi"
-import { cryptoHistoryApi } from "../services/cryptoHistoryApi"
+import { createStore, applyMiddleware } from "redux"
+import thunk from "redux-thunk"
+import rootReducer from "./rootReducer"
+import { composeWithDevTools } from "redux-devtools-extension"
 
-export default configureStore({
-  reducer: {
-    [cryptoApi.reducerPath]: cryptoApi.reducer,
-    [cryptoNewsApi.reducerPath]: cryptoNewsApi.reducer,
-    [cryptoHistoryApi.reducerPath]: cryptoHistoryApi.reducer,
-  },
-})
+export default function configureStore() {
+  return createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
+}

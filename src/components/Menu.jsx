@@ -6,7 +6,7 @@ import ListItemText from "@mui/material/ListItemText"
 import ListItemIcon from "@mui/material/ListItemIcon"
 import HomeIcon from "@mui/icons-material/Home"
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance"
-import AutorenewIcon from "@mui/icons-material/Autorenew"
+// import AutorenewIcon from "@mui/icons-material/Autorenew"
 import AutoStoriesIcon from "@mui/icons-material/AutoStories"
 
 const Menu = () => {
@@ -29,14 +29,14 @@ const Menu = () => {
             <span>Cryptocurrencies</span>
           </ListItemText>
         </MenuItem>
-        <MenuItem component={Link} to={"/exchanges"}>
+        {/* <MenuItem component={Link} to={"/exchanges"}>
           <ListItemIcon>
             <AutorenewIcon fontSize="large" />
           </ListItemIcon>
           <ListItemText>
             <span>Exchanges</span>
           </ListItemText>
-        </MenuItem>
+        </MenuItem> */}
         <MenuItem component={Link} to={"/news"}>
           <ListItemIcon>
             <AutoStoriesIcon fontSize="large" />
