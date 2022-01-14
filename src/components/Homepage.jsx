@@ -61,14 +61,14 @@ const Homepage = () => {
           Show More
         </Button>
       </div>
-      {/* <div className="home-container">
+      <div className="home-container">
         <h2> Latest News</h2>
         <News simplified />
         <br />
         <Button as={Link} to="/News" variant="outlined">
           Show More
         </Button>
-      </div> */}
+      </div>
     </Container>
   )
 }
