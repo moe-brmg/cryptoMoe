@@ -61,7 +61,7 @@ const CryptoDetails = () => {
     <Container style={{ marginTop: 100 }}>
       <Box className="coin-heading-container">
         <h2 level={2} className="coin-name">
-          {cryptoDetails?.name} ({cryptoDetails?.symbolgit}) Price
+          {cryptoDetails?.name} ({cryptoDetails?.symbol}) Price
         </h2>
         <p>
           {cryptoDetails?.name} live price in US Dollar (USD). View value
