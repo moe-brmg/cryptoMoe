@@ -55,38 +55,13 @@ const CryptoDetails = () => {
         }`,
       },
     ]
-
-    // const genericStats = [
-    //   {
-    //     title: "Number Of Markets",
-    //     value: `${cryptoDetails?.numberOfMarkets || 0}`,
-    //   },
-    //   {
-    //     title: "Number Of Exchanges",
-    //     value: `${cryptoDetails?.numberOfExchanges || 0}`,
-    //   },
-    //   // { title: 'Aprroved Supply', value: cryptoDetails?.approvedSupply ? <CheckOutlined /> : <StopOutlined />, icon: <ExclamationCircleOutlined /> },
-    //   {
-    //     title: "Total Supply",
-    //     value: `$ ${
-    //       cryptoDetails?.totalSupply && millify(cryptoDetails?.totalSupply)
-    //     }`,
-    //   },
-    //   {
-    //     title: "Circulating Supply",
-    //     value: `$ ${
-    //       cryptoDetails?.circulatingSupply &&
-    //       millify(cryptoDetails?.circulatingSupply)
-    //     }`,
-    //   },
-    // ]
   }
 
   return (
     <Container style={{ marginTop: 100 }}>
       <Box className="coin-heading-container">
         <h2 level={2} className="coin-name">
-          {cryptoDetails?.name} ({cryptoDetails?.symbol}) Price
+          {cryptoDetails?.name} ({cryptoDetails?.symbolgit}) Price
         </h2>
         <p>
           {cryptoDetails?.name} live price in US Dollar (USD). View value

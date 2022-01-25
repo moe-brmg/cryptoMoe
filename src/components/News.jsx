@@ -35,14 +35,14 @@ const News = ({ simplified }) => {
           sx={{ width: 300 }}
           renderInput={(params) => <TextField {...params} label="Search" />}
           options={
-            coins?.length > 0
+            coins?.status === "success"
               ? coins?.length !== 0
                 ? [
                     "cryptocurrency",
                     ...coins?.data?.coins?.map((coin) => coin.name),
                   ]
                 : ["cryptocurrency"]
-              : ""
+              : []
           }
         />
       )}
