@@ -56,7 +56,8 @@ export async function getCoinApi(coinId = 1) {
 export async function getCoinHistoryApi(coinId, timePeriod) {
   var options = {
     method: "GET",
-    url: `https://coinranking1.p.rapidapi.com/coin/${coinId}/history/${timePeriod}`,
+    url: `https://coinranking1.p.rapidapi.com/coin/${coinId}/history`,
+    params: { referenceCurrencyUuid: "yhjMzLPhuIDl", timePeriod: timePeriod },
     headers: {
       "x-rapidapi-host": "coinranking1.p.rapidapi.com",
       "x-rapidapi-key": "2885c3a350msh9ac9dcb2d584128p11602bjsn6dc312fa5b4a",

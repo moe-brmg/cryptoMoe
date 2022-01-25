@@ -15,8 +15,8 @@ const Cryptocurrencies = ({ simplified }) => {
   const { loading, coins } = useSelector((state) => state.crypto)
 
   useEffect(() => {
-    if (coins.length < 1) dispatch(fetchCoins(count))
-  }, [coins.length, count, dispatch])
+    if (coins?.length < 1) dispatch(fetchCoins(count))
+  }, [coins?.length, count, dispatch])
 
   useEffect(() => {
     const filteredData = coins?.data?.coins.filter((coin) =>
@@ -43,8 +43,15 @@ const Cryptocurrencies = ({ simplified }) => {
       )}
       <Grid container spacing={2}>
         {cryptos?.map((coin) => (
-          <Grid item xs={12} sm={6} lg={4} className="cypto-card" key={coin.id}>
-            <Link to={`./crypto/${coin.id}`}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            lg={4}
+            className="cypto-card"
+            key={coin.uuid}
+          >
+            <Link to={`./crypto/${coin.uuid}`}>
               <Card>
                 <CardContent>
                   <Grid container>

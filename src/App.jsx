@@ -22,7 +22,6 @@ import {
   CryptoDetails,
 } from "./components"
 import Container from "@mui/material/Container"
-import { Avatar } from "@mui/material"
 
 const drawerWidth = 240
 

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import Stack from "@mui/material/Stack"
 import { useDispatch, useSelector } from "react-redux"
 import Loading from "./Loading"
-import { Cryptocurrencies, News } from "."
+import { Cryptocurrencies } from "."
 import { Button, Container } from "@mui/material"
 import { getCoinStats, isEmpty } from "../app/cryptoActions"
 
@@ -31,25 +31,28 @@ const Homepage = () => {
         <div className="stat">
           <span className="title">Exhchanges:</span>
           <span className="value">
-            {!isEmpty(stats) && millify(stats?.data?.totalExchanges)}
+            {stats?.data?.totalExchanges &&
+              millify(stats?.data?.totalExchanges)}
           </span>
         </div>
         <div className="stat">
           <span className="title">Marketcap:</span>
           <span className="value">
-            {!isEmpty(stats) && millify(stats?.data?.totalMarketCap)}
+            {stats?.data?.totalMarketCap &&
+              millify(stats?.data?.totalMarketCap)}
           </span>
         </div>
         <div className="stat">
           <span className="title">24 Vol:</span>
           <span className="value">
-            {!isEmpty(stats) && millify(stats?.data?.total24hVolume)}
+            {stats?.data?.total24hVolume &&
+              millify(stats?.data?.total24hVolume)}
           </span>
         </div>
         <div className="stat">
           <span className="title">Markets:</span>
           <span className="value">
-            {!isEmpty(stats) && millify(stats?.data?.totalMarkets)}
+            {stats?.data?.totalMarkets && millify(stats?.data?.totalMarkets)}
           </span>
         </div>
       </Stack>

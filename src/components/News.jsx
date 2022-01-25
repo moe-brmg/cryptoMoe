@@ -16,8 +16,8 @@ const News = ({ simplified }) => {
 
   useEffect(() => {
     dispatch(getCoinNews(count, category))
-    if (coins.length < 99) dispatch(fetchCoins(100))
-  }, [category, coins.length, dispatch])
+    if (coins?.length < 99) dispatch(fetchCoins(100))
+  }, [category, coins?.length, dispatch])
 
   if (loading) return <Loading />
 
@@ -35,12 +35,14 @@ const News = ({ simplified }) => {
           sx={{ width: 300 }}
           renderInput={(params) => <TextField {...params} label="Search" />}
           options={
-            coins.length !== 0
-              ? [
-                  "cryptocurrency",
-                  ...coins?.data?.coins?.map((coin) => coin.name),
-                ]
-              : ["cryptocurrency"]
+            coins?.length > 0
+              ? coins?.length !== 0
+                ? [
+                    "cryptocurrency",
+                    ...coins?.data?.coins?.map((coin) => coin.name),
+                  ]
+                : ["cryptocurrency"]
+              : ""
           }
         />
       )}
